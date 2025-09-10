@@ -1,9 +1,10 @@
 import sys
-from random import choice
-
 import pygame
+import random
+
 from pygame.font import Font
 from pygame import Surface, Rect
+#from random import choice, random
 
 from code.Const import COLOR_WHITE, WIN_HEIGHT, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME
 from code.Entity import Entity
@@ -38,13 +39,13 @@ class Level:
                     sys.exit()
                 if event.type == EVENT_ENEMY:
                     choice = random.choice(('Enemy1', 'Enemy2'))
-                    self.entity_list.append(EntityFactory.get_entity('choice'))
+                    self.entity_list.append(EntityFactory.get_entity(choice))
 
             self.level_text(14, f'{self.name} -Timeout:{self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
             self.level_text(14, f'fps:{clok.get_fps() :.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
             self.level_text(14, f'entidades:{len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
             pygame.display.flip()
-        pass
+    pass
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
